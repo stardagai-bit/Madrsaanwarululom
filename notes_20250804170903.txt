@@ -1,0 +1,147 @@
+08.04 4:27 pm
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Madrsa Anwar ul alom - Login Protected</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f4f4; }
+    header, footer { background: #333; color: white; padding: 10px; text-align: center; }
+    nav { background: #007bff; padding: 10px; text-align: center; }
+    nav a { color: white; margin: 0 10px; text-decoration: none; }
+    nav a:hover { text-decoration: underline; }
+    section { padding: 20px; margin: 10px; background: white; border-radius: 5px; }
+    h1, h2 { color: #333; }
+    form label { display: block; margin: 10px 0 5px; }
+    form input, form textarea, form select { width: 100%; padding: 8px; margin-bottom: 10px; }
+    #mainContent { display: none; }
+    .auth-container { max-width: 400px; margin: 50px auto; background: white; padding: 20px; border-radius: 5px; }
+    .auth-container h2 { text-align: center; }
+    .btn { background: #007bff; color: white; padding: 10px; border: none; width: 100%; }
+  </style>
+</head>
+<body>
+
+<div id="authForms" class="auth-container">
+  <h2>Sign In</h2>
+  <form id="signInForm">
+    <label>Email:</label>
+    <input type="email" id="signInEmail" required>
+    <label>Password:</label>
+    <input type="password" id="signInPassword" required>
+    <button type="submit" class="btn">Sign In</button>
+  </form>
+  <p style="text-align:center;">or</p>
+  <h2>Sign Up</h2>
+  <form id="signUpForm">
+    <label>Email:</label>
+    <input type="email" id="signUpEmail" required>
+    <label>Password:</label>
+    <input type="password" id="signUpPassword" required>
+    <button type="submit" class="btn">Sign Up</button>
+  </form>
+</div>
+
+<div id="mainContent">
+  <header>
+    <h1>Madrsa Anwar ul alom</h1>
+    <p>Totalai Sambal</p>
+  </header>
+
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#admissions">Admissions</a>
+    <a href="#classes">Classes</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <section id="home">
+    <h2>Welcome to Madrsa Anwar ul alom</h2>
+    <p>Providing quality religious and academic education from Class 1 to 10.</p>
+  </section>
+
+  <section id="about">
+    <h2>About Us</h2>
+    <p>Madrsa Anwar ul alom is a respected educational institution based in Totalai Sambal. We focus on both religious and modern education from Class 1 to 10.</p>
+  </section>
+
+  <section id="admissions">
+    <h2>Online Admission Form</h2>
+    <form action="https://formsubmit.co/Star.dagai@gmail.com" method="POST" enctype="multipart/form-data">
+      <label>Student Name:</label>
+      <input type="text" name="Student Name" required>
+      <label>Father's Name:</label>
+      <input type="text" name="Father's Name" required>
+      <label>Date of Birth:</label>
+      <input type="date" name="Date of Birth" required>
+      <label>Class:</label>
+      <select name="Class" required>
+        <option>Class 1</option><option>Class 2</option><option>Class 3</option>
+        <option>Class 4</option><option>Class 5</option><option>Class 6</option>
+        <option>Class 7</option><option>Class 8</option><option>Class 9</option>
+        <option>Class 10</option>
+      </select>
+      <label>Phone Number:</label>
+      <input type="tel" name="Phone Number" required>
+      <label>Email:</label>
+      <input type="email" name="Email">
+      <label>Address:</label>
+      <textarea name="Address" required></textarea>
+      <label>Upload Document:</label>
+      <input type="file" name="Document" accept=".jpg,.jpeg,.png,.pdf">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="submit" value="Submit Application">
+    </form>
+  </section>
+
+  <section id="classes">
+    <h2>Classes Offered</h2>
+    <ul>
+      <li>Class 1</li><li>Class 2</li><li>Class 3</li><li>Class 4</li><li>Class 5</li>
+      <li>Class 6</li><li>Class 7</li><li>Class 8</li><li>Class 9</li><li>Class 10</li>
+    </ul>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <p>Phone: 03434796063</p>
+    <p>Email: <a href="mailto:Star.dagai@gmail.com">Star.dagai@gmail.com</a></p>
+    <p>Location: Totalai Sambal</p>
+  </section>
+
+  <footer>
+    &copy; 2025 Madrsa Anwar ul alom
+  </footer>
+</div>
+
+<script>
+  const signInForm = document.getElementById('signInForm');
+  const signUpForm = document.getElementById('signUpForm');
+  const mainContent = document.getElementById('mainContent');
+  const authForms = document.getElementById('authForms');
+
+  signUpForm.onsubmit = function(e) {
+    e.preventDefault();
+    const email = document.getElementById('signUpEmail').value;
+    const password = document.getElementById('signUpPassword').value;
+    localStorage.setItem('madrasaUser', JSON.stringify({ email, password }));
+    alert('Sign Up successful! Now you can sign in.');
+  };
+
+  signInForm.onsubmit = function(e) {
+    e.preventDefault();
+    const email = document.getElementById('signInEmail').value;
+    const password = document.getElementById('signInPassword').value;
+    const savedUser = JSON.parse(localStorage.getItem('madrasaUser'));
+    if (savedUser && savedUser.email === email && savedUser.password === password) {
+      authForms.style.display = 'none';
+      mainContent.style.display = 'block';
+    } else {
+      alert('Invalid credentials. Please try again or sign up.');
+    }
+  };
+</script>
+
+</body>
+</html>
